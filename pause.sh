@@ -15,7 +15,7 @@ err() { printf 'Err: %s\n' "$1" >&2; exit 1; }
 (($# == 0)) && err 'no argument supplied'
 while [ $# != 0 ]
 do
-    if [[ x"`ps -Ac -opid,command,state | grep -i -m1 -e "$1"
+    if [[ x"`ps -Ac -opid,command,state | grep -i -m1 -e "$1" \
 	    | awk '{print $3;}'`" == x"T" ]]; then
         SIG="CONT"
     else
