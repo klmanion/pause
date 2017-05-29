@@ -3,7 +3,7 @@ pause — Pauses or unpauses a process (depending on state) by name.
 
 Use is simple, just type <code>pause \<name of process(es)\></code>
 and it will either send a SIGSTOP or SIGCONT signal,
-depending on whether the process is running or stopped respectively.
+depending on whether the process is running or stopped, respectively.
 This allows you to easily pause and then resume the same process with the same command,
 without bothering to check state yourself.
 
