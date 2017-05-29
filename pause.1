@@ -1,0 +1,55 @@
+\" pause.1 manpage
+.Dd 29 May 2017
+.Dt PAUSE 1
+.Os UNIX
+.Sh NAME
+.Nm pause
+.Nd pauses or unpauses a process (depending on state) by name
+.Sh SYNOPSIS
+.Nm
+.Op Fl v
+.Ar processes...
+.Sh DESCRIPTION
+This script will either send a SIGSTOP or SIGCONT signal, depending on whether the process is running or stopped, respectively.
+This allows you to easily pause and then resume the same process with the same command, without bothering to check the state of the process yourself.
+
+You may specify an arbitrary number of arguments, which signify which processes are to be stopped or resumed, and all processes with a matching name will be sent the appropriate signal;
+.Xr pkill 1
+is used to match the names to the PID.
+
+If you wish to be sure that a process will be sent the SIGCONT, or SIGSTOP,
+instead of allowing
+.Nm
+to invert the state (which is this scripts enhanced functionality over 
+.Xr pkill 1 )
+specify the \-u or \-p, respectively.
+But this is the same functionality as 
+.Xr pkill 1 ,
+itself.
+
+Use of 
+.Nm
+in shell scripts is safe, since there is no output, unless you specify the verbose option flag (\-v).
+.Sh OPTIONS
+.Bl -hang
+.It Sy Fl u ,
+Ensure that the signal sent is SIGCONT.
+This overrides any previous \-p flag.
+.It Sy Fl p ,
+Ensure that the signal send is SIGSTOP.
+This overrides any previous \-u flag.
+.It Sy Fl v ,
+Verbose output: prints the names and newley updated status of each process
+signaled by
+.Nm .
+.Sh EXAMPLES
+This inverts the state (pauses or unpauses) of Starcraft II and the three Battle.net agents:
+.D1 pause sc2 battle
+.Sh AUTHOR
+pause was created by
+.An Kurt L. Manion
+on 27 May 2016.
+.Sh CONTACT
+.Aq klmanion@gmail.com
+.Sh VERSION
+version 1.2.1 \(em 29 May 2017.
